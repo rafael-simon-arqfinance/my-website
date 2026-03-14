@@ -1,9 +1,17 @@
 import time
 import threading
 
+import certifi
+import requests
 import yfinance as yf
 from django.shortcuts import render
 from django.http import JsonResponse
+
+
+def _make_session():
+    s = requests.Session()
+    s.verify = certifi.where()
+    return s
 
 SECURITIES = {
     'ODF 27':  'DI1F27.SA',
@@ -36,9 +44,10 @@ def home(request):
 def api_history(request):
     def fetch():
         result = {}
+        session = _make_session()
         for label, ticker in SECURITIES.items():
             try:
-                hist = yf.Ticker(ticker).history(period='1mo', interval='1d')
+                hist = yf.Ticker(ticker, session=session).history(period='1mo', interval='1d')
                 if hist.empty:
                     result[label] = {'dates': [], 'prices': []}
                 else:
@@ -56,12 +65,13 @@ def api_history(request):
 def api_prices(request):
     def fetch():
         result = {}
+        session = _make_session()
         for label, ticker in SECURITIES.items():
             try:
-                fi = yf.Ticker(ticker).fast_info
-                price = fi.last_price
+                t = yf.Ticker(ticker, session=session)
+                price = t.fast_info.last_price
                 if price is None:
-                    hist = yf.Ticker(ticker).history(period='1d', interval='1m')
+                    hist = t.history(period='1d', interval='1m')
                     price = float(hist['Close'].iloc[-1]) if not hist.empty else None
                 result[label] = round(float(price), 4) if price is not None else None
             except Exception:
