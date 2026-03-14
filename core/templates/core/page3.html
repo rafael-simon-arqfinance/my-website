@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Page 3 — MyWebsite{% endblock %}
+
+{% block extra_css %}
+  .page-hero {
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    color: #fff;
+    padding: 3.5rem 0 2.5rem;
+  }
+  .page-hero h1 { font-weight: 800; font-size: 2.5rem; }
+  .content-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,.07);
+  }
+  .placeholder-img {
+    border-radius: .75rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c2c7 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    font-size: 5rem;
+    color: #dc3545;
+  }
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .feature-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+{% endblock %}
+
+{% block content %}
+
+  <!-- Page hero -->
+  <section class="page-hero text-center">
+    <div class="container">
+      <span class="badge bg-white text-danger fw-semibold mb-3 px-3 py-2">
+        <i class="bi bi-file-earmark-image me-1"></i>Page 3
+      </span>
+      <h1>What We Offer</h1>
+      <p class="lead opacity-90 mb-0">Delivering quality with every pixel and every line of code.</p>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+
+        <!-- Image column (left on desktop) -->
+        <div class="col-lg-6 order-lg-1">
+          <div class="placeholder-img">
+            <div class="text-center">
+              <i class="bi bi-image d-block mb-3"></i>
+              <p class="fs-6 fw-semibold text-danger mb-0" style="font-size:1rem !important;">
+                Placeholder Image
+              </p>
+              <p class="text-muted small">1200 × 800 px</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text column (right on desktop) -->
+        <div class="col-lg-6 order-lg-2">
+          <div class="card content-card p-4 p-lg-5">
+            <h2 class="fw-bold mb-3">Our Services</h2>
+            <p class="text-muted lh-lg">
+              Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum
+              primis in faucibus orci luctus et ultrices posuere cubilia curae.
+              Donec sollicitudin molestie malesuada. Curabitur non nulla sit amet
+              nisl tempus convallis quis ac lectus.
+            </p>
+
+            <div class="d-flex flex-column gap-3 mt-3 mb-4">
+
+              <div class="feature-item">
+                <div class="feature-icon bg-danger bg-opacity-10 text-danger">
+                  <i class="bi bi-palette2"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">UI / UX Design</h6>
+                  <p class="text-muted small mb-0">Crafting interfaces users love to interact with.</p>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon bg-warning bg-opacity-10 text-warning">
+                  <i class="bi bi-code-slash"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">Web Development</h6>
+                  <p class="text-muted small mb-0">Robust, maintainable code built on modern stacks.</p>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon bg-primary bg-opacity-10 text-primary">
+                  <i class="bi bi-cloud-upload"></i>
+                </div>
+                <div>
+                  <h6 class="fw-bold mb-1">Cloud Deployment</h6>
+                  <p class="text-muted small mb-0">Seamless CI/CD pipelines and scalable hosting.</p>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="d-flex gap-3 flex-wrap">
+              <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i>Back to Home
+              </a>
+              <a href="{% url 'page2' %}" class="btn btn-danger">
+                <i class="bi bi-arrow-left me-1"></i>Back to Page 2
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

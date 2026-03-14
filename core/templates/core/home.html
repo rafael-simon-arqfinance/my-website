@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Home — MyWebsite{% endblock %}
+
+{% block extra_css %}
+  .hero {
+    background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+    color: #fff;
+    padding: 4rem 0 3rem;
+  }
+  .hero h1 { font-size: 2.75rem; font-weight: 800; }
+  .hero p  { font-size: 1.2rem; opacity: 0.9; }
+  .chart-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,.08);
+  }
+{% endblock %}
+
+{% block content %}
+
+  <!-- Hero -->
+  <section class="hero text-center">
+    <div class="container">
+      <h1><i class="bi bi-bar-chart-line-fill me-3"></i>Welcome to MyWebsite</h1>
+      <p class="mt-3 mb-4">A clean Django starter with Bootstrap 5 and Chart.js.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="{% url 'page2' %}" class="btn btn-light btn-lg fw-semibold px-4">
+          <i class="bi bi-file-earmark-text me-2"></i>Go to Page 2
+        </a>
+        <a href="{% url 'page3' %}" class="btn btn-outline-light btn-lg fw-semibold px-4">
+          <i class="bi bi-file-earmark-image me-2"></i>Go to Page 3
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chart -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+
+          <div class="card chart-card p-4">
+            <div class="d-flex align-items-center mb-3 gap-2">
+              <span class="badge bg-primary rounded-pill px-3 py-2 fs-6">
+                <i class="bi bi-bar-chart-fill me-1"></i>Monthly Revenue
+              </span>
+              <span class="text-muted small ms-auto">Jan – Jun 2026 &nbsp;·&nbsp; Dummy data</span>
+            </div>
+            <canvas id="revenueChart" style="max-height:360px;"></canvas>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Info cards below the chart -->
+      <div class="row g-4 mt-4">
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm rounded-3 p-4 text-center h-100">
+            <i class="bi bi-graph-up-arrow text-primary fs-2 mb-2"></i>
+            <h5 class="fw-bold">Growth Tracking</h5>
+            <p class="text-muted mb-0">Visualise trends with interactive Chart.js charts.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm rounded-3 p-4 text-center h-100">
+            <i class="bi bi-bootstrap-fill text-purple fs-2 mb-2" style="color:#6f42c1;"></i>
+            <h5 class="fw-bold">Bootstrap 5</h5>
+            <p class="text-muted mb-0">Responsive layouts out of the box, no extra CSS needed.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm rounded-3 p-4 text-center h-100">
+            <i class="bi bi-lightning-charge-fill text-warning fs-2 mb-2"></i>
+            <h5 class="fw-bold">Django Powered</h5>
+            <p class="text-muted mb-0">Template inheritance keeps every page consistent and DRY.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block extra_js %}
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<script>
+  const ctx = document.getElementById('revenueChart').getContext('2d');
+
+  const gradient = ctx.createLinearGradient(0, 0, 0, 360);
+  gradient.addColorStop(0,   'rgba(13,110,253,0.35)');
+  gradient.addColorStop(1,   'rgba(13,110,253,0.02)');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      datasets: [
+        {
+          label: 'Revenue ($)',
+          data: [42000, 58000, 51000, 73000, 66000, 89000],
+          backgroundColor: [
+            'rgba(13,110,253,0.80)',
+            'rgba(102,16,242,0.80)',
+            'rgba(13,110,253,0.80)',
+            'rgba(102,16,242,0.80)',
+            'rgba(13,110,253,0.80)',
+            'rgba(102,16,242,0.80)',
+          ],
+          borderRadius: 8,
+          borderSkipped: false,
+        },
+        {
+          label: 'Target ($)',
+          data: [50000, 55000, 60000, 65000, 70000, 75000],
+          type: 'line',
+          borderColor: '#fd7e14',
+          backgroundColor: 'transparent',
+          pointBackgroundColor: '#fd7e14',
+          pointRadius: 5,
+          borderWidth: 2,
+          tension: 0.35,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: {
+          callbacks: {
+            label: ctx => ' $' + ctx.parsed.y.toLocaleString()
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(0,0,0,0.06)' },
+          ticks: {
+            callback: val => '$' + (val / 1000) + 'k'
+          }
+        },
+        x: {
+          grid: { display: false }
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

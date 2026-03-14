@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Page 2 — MyWebsite{% endblock %}
+
+{% block extra_css %}
+  .page-hero {
+    background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+    color: #fff;
+    padding: 3.5rem 0 2.5rem;
+  }
+  .page-hero h1 { font-weight: 800; font-size: 2.5rem; }
+  .content-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,.07);
+  }
+  .placeholder-img {
+    border-radius: .75rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, #d1e7dd 0%, #a3cfbb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    font-size: 5rem;
+    color: #198754;
+  }
+{% endblock %}
+
+{% block content %}
+
+  <!-- Page hero -->
+  <section class="page-hero text-center">
+    <div class="container">
+      <span class="badge bg-white text-success fw-semibold mb-3 px-3 py-2">
+        <i class="bi bi-file-earmark-text me-1"></i>Page 2
+      </span>
+      <h1>Discover Our Story</h1>
+      <p class="lead opacity-90 mb-0">Great things start with a solid foundation.</p>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+
+        <!-- Text column -->
+        <div class="col-lg-6">
+          <div class="card content-card p-4 p-lg-5">
+            <h2 class="fw-bold mb-3">About This Page</h2>
+            <p class="text-muted lh-lg">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at
+              libero vel nunc interdum fermentum. Suspendisse potenti. Donec
+              tincidunt enim vitae lorem interdum, in blandit orci pellentesque.
+              Vivamus lacinia odio vitae vestibulum vestibulum.
+            </p>
+            <p class="text-muted lh-lg mb-0">
+              Quisque velit nisi, pretium ut lacinia in, elementum id enim.
+              Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.
+              Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet
+              quam vehicula elementum sed sit amet dui.
+            </p>
+
+            <hr class="my-4" />
+
+            <div class="d-flex gap-4">
+              <div>
+                <div class="fs-4 fw-bold text-success">120+</div>
+                <div class="text-muted small">Projects Done</div>
+              </div>
+              <div>
+                <div class="fs-4 fw-bold text-success">40</div>
+                <div class="text-muted small">Team Members</div>
+              </div>
+              <div>
+                <div class="fs-4 fw-bold text-success">8 yrs</div>
+                <div class="text-muted small">Experience</div>
+              </div>
+            </div>
+
+            <div class="mt-4 d-flex gap-3 flex-wrap">
+              <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i>Back to Home
+              </a>
+              <a href="{% url 'page3' %}" class="btn btn-success">
+                Go to Page 3<i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image column -->
+        <div class="col-lg-6">
+          <div class="placeholder-img">
+            <div class="text-center">
+              <i class="bi bi-image d-block mb-3"></i>
+              <p class="fs-6 fw-semibold text-success mb-0" style="font-size:1rem !important;">
+                Placeholder Image
+              </p>
+              <p class="text-muted small">1200 × 800 px</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
